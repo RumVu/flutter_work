@@ -25,21 +25,29 @@ void themSanPhamVaoDanhSach() {
     }
   }
   double? gia;
-  while (gia == null) {
-    print('Nhập giá tiền:');
+  while (gia == null || gia < 0) {
+    print('Nhập giá tiền (phải lớn hơn hoặc bằng 0):');
     String? chuoiGia = stdin.readLineSync();
     if (chuoiGia != null && double.tryParse(chuoiGia) != null) {
       gia = double.parse(chuoiGia);
+      if (gia < 0) {
+        print('Giá tiền không được âm. Vui lòng nhập lại.');
+        gia = null;
+      }
     } else {
       print('Giá tiền không hợp lệ. Vui lòng nhập lại.');
     }
   }
   int? soLuong;
-  while (soLuong == null) {
-    print('Nhập số lượng trong kho:');
+  while (soLuong == null || soLuong < 0) {
+    print('Nhập số lượng trong kho (phải lớn hơn hoặc bằng 0):');
     String? chuoiSoLuong = stdin.readLineSync();
     if (chuoiSoLuong != null && int.tryParse(chuoiSoLuong) != null) {
       soLuong = int.parse(chuoiSoLuong);
+      if (soLuong < 0) {
+        print('Số lượng không được âm. Vui lòng nhập lại.');
+        soLuong = null;
+      }
     } else {
       print('Số lượng không hợp lệ. Vui lòng nhập lại.');
     }
@@ -62,6 +70,7 @@ void hienThiDanhSachSanPham() {
 }
 
 void timKiemSanPhamTheoTen() {
+  // ... (Hàm này không liên quan đến kiểm tra giá và số lượng âm)
   print('Nhập tên sản phẩm cần tìm:');
   String? tenTimKiem;
   while (tenTimKiem == null || tenTimKiem.isEmpty) {
@@ -94,11 +103,15 @@ void banSanPham() {
     }
   }
   int? soLuongBan;
-  while (soLuongBan == null) {
-    print('Nhập số lượng cần bán:');
+  while (soLuongBan == null || soLuongBan <= 0) {
+    print('Nhập số lượng cần bán (phải lớn hơn 0):');
     String? chuoiSoLuongBan = stdin.readLineSync();
     if (chuoiSoLuongBan != null && int.tryParse(chuoiSoLuongBan) != null) {
       soLuongBan = int.parse(chuoiSoLuongBan);
+      if (soLuongBan <= 0) {
+        print('Số lượng bán phải lớn hơn 0. Vui lòng nhập lại.');
+        soLuongBan = null;
+      }
     } else {
       print('Số lượng không hợp lệ. Vui lòng nhập lại.');
     }
@@ -151,7 +164,7 @@ void main() {
           banSanPham();
           break;
         case 0:
-          print('Đã thoát chương trình. Chào anh yêu!');
+          print('Đã thoát chương trình. Chào bé yêu!');
           break;
         default:
           print('Lựa chọn không hợp lệ. Vui lòng thử lại.');
